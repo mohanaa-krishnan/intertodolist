@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- No-flash theme script: runs before stylesheet to avoid FOIT -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (_) {}
+  </script>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0d0d0d">
+  <title>To-Do List</title>
+  <meta name="description" content="A client-side to-do list built with vanilla JavaScript: full CRUD, filtering, and automatic localStorage persistence.">
+  <meta name="author" content="Mohanaa Krishnan">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="To-Do List | Mohanaa Krishnan">
+  <meta property="og:description" content="A state-driven to-do list that keeps your tasks across browser reloads.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="To-Do List | Mohanaa Krishnan">
+  <meta name="twitter:description" content="A state-driven to-do list that keeps your tasks across browser reloads.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Geist:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="To-Do List, top of page">
+        <span class="brand-mark" aria-hidden="true">mk</span>
+        <span>To-Do List <span class="brand-divider">/ vanilla JS</span></span>
+      </a>
+      <div class="header-controls">
+        <button type="button" class="theme-toggle" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <span class="theme-toggle-label">Dark mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero container" aria-labelledby="page-title">
+      <p class="eyebrow">JavaScript logic &amp; state management</p>
+      <h1 id="page-title">To-Do <em>list.</em></h1>
+      <p class="page-lede">A small task manager built with vanilla JavaScript. Add, edit, complete, and delete tasks. Everything is saved in your browser, so your list is still here after a reload.</p>
+    </section>
+
+    <section class="container todo-section" aria-labelledby="todo-heading">
+      <div class="todo-app" id="todo-app">
+        <h2 id="todo-heading" class="visually-hidden">Your tasks</h2>
+
+        <form class="todo-form" id="todo-form" novalidate>
+          <label class="visually-hidden" for="todo-input">New task</label>
+          <input class="todo-input" id="todo-input" name="task" type="text" maxlength="200"
+                 placeholder="What needs to be done?" autocomplete="off" aria-describedby="todo-error">
+          <button class="button button-primary" type="submit">Add task</button>
+        </form>
+        <p class="todo-error" id="todo-error" role="alert"></p>
+
+        <div class="todo-toolbar">
+          <div class="todo-filters" id="todo-filters" role="group" aria-label="Filter tasks">
+            <button type="button" class="todo-filter" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="todo-filter" data-filter="active" aria-pressed="false">Active</button>
+            <button type="button" class="todo-filter" data-filter="completed" aria-pressed="false">Completed</button>
+          </div>
+          <p class="todo-count" id="todo-count"></p>
+        </div>
+
+        <ul class="todo-list" id="todo-list"></ul>
+        <p class="todo-empty" id="todo-empty" hidden></p>
+
+        <div class="todo-footer">
+          <p class="todo-hint">Double-click a task, or press Edit, to change it. Enter saves, Esc cancels.</p>
+          <button type="button" class="todo-clear" id="todo-clear">Clear completed</button>
+        </div>
+
+        <p class="visually-hidden" id="todo-status" role="status" aria-live="polite"></p>
+      </div>
+      <noscript><p class="todo-noscript">This app needs JavaScript to run.</p></noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand"><span class="brand-mark" aria-hidden="true">mk</span> <span>Mohanaa Krishnan</span></p>
+      <p class="footer-note">To-Do List · <span id="current-year">2026</span></p>
+    </div>
+  </footer>
+</body>
+</html>
